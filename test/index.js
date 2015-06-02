@@ -27,11 +27,17 @@ module.exports = {
   },
 
   mountVersionedRoute: function (test) {
-    test.expect(4);
+    test.expect(5);
 
     var wares = versionRoutes(path.join(__dirname, 'routes'), ['v1']);
 
     test.equal(wares.length, 2, 'Subrouter not mounted correctly.');
+
+    test.equal(
+      wares[0].stack[0].regexp.toString(),
+      /^\/v1\/?(?=\/|$)/i.toString(),
+      'Version path not mounted.'
+    );
 
     wares[1]({}, {}, function () {
       test.ok(true, 'Unversioned request passes to next.');
