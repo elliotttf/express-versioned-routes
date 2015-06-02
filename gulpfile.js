@@ -1,3 +1,4 @@
+var coveralls = require('gulp-coveralls');
 var gulp = require('gulp');
 var istanbul = require('gulp-istanbul');
 var nodeunit = require('gulp-nodeunit');

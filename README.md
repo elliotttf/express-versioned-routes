@@ -1,6 +1,7 @@
 # Express Versioned Routes
 
 [![Build Status](https://travis-ci.org/elliotttf/express-versioned-routes.svg)](https://travis-ci.org/elliotttf/express-versioned-routes)
+[![Coverage Status](https://coveralls.io/repos/elliotttf/express-versioned-routes/badge.svg)](https://coveralls.io/r/elliotttf/express-versioned-routes)
 
 This middleware allows express routes to be mounted by version and provides a method
 to route between version paths and accept headers. The latter is based on the assumption
