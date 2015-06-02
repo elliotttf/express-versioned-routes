@@ -30,3 +30,7 @@ gulp.task('test', [ 'lint' ], function (cb) {
     });
 });
 
+gulp.task('coveralls', function (cb) {
+  gulp.src('coverage/**/lcov.info').pipe(coveralls());
+});
+
