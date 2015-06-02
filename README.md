@@ -1,5 +1,7 @@
 # Express Versioned Routes
 
+[![Build Status](https://travis-ci.org/elliotttf/express-versioned-routes.svg)](https://travis-ci.org/elliotttf/express-versioned-routes)
+
 This middleware allows express routes to be mounted by version and provides a method
 to route between version paths and accept headers. The latter is based on the assumption
 that a version property will exist on the request object. See [express-request-version](https://www.npmjs.com/package/express-request-version)
