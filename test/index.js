@@ -41,9 +41,9 @@ module.exports = {
 
     wares[1]({}, {}, function () {
       test.ok(true, 'Unversioned request passes to next.');
-      wares[1]({ version: 'v2' }, {}, function () {
+      wares[1]({version: 'v2'}, {}, function () {
         test.ok(true, 'Mismatched version passes to next.');
-        wares[1]({ version: 'v1' }, {}, function () {
+        wares[1]({version: 'v1'}, {}, function () {
           test.ok(true, 'Versioned route handled.');
           test.done();
         });
