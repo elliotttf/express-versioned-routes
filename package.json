@@ -1,13 +1,14 @@
 {
   "name": "express-versioned-routes",
-  "version": "1.0.5",
+  "version": "0.0.0-development",
   "description": "Mount versioned routes on an express app.",
   "main": "lib/routes.js",
   "scripts": {
     "test": "istanbul cover --print both nodeunit ./test/index.js",
     "lint": "eslint .",
     "coverage": "istanbul check-coverage --statements 100 --lines 100 --branches 100 --functions 100",
-    "coveralls": "cat ./coverage/lcov.info | coveralls"
+    "coveralls": "cat ./coverage/lcov.info | coveralls",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "repository": {
     "type": "git",
@@ -32,7 +33,8 @@
     "express": "^4.14.0",
     "ghooks": "^1.2.4",
     "istanbul": "^0.4.4",
-    "nodeunit": "^0.10.2"
+    "nodeunit": "^0.10.2",
+    "semantic-release": "^6.3.2"
   },
   "config": {
     "ghooks": {
