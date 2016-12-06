@@ -1,6 +1,9 @@
 'use strict';
 
+const express = require('express');
 const path = require('path');
+const request = require('supertest');
+const requestVersion = require('express-request-version');
 const versionRoutes = require('../');
 
 module.exports = {
@@ -28,31 +31,34 @@ module.exports = {
     test.done();
   },
 
-  mountVersionedRoute(test) {
-    test.expect(6);
+  mountVersionedRoute: {
+    setUp(cb) {
+      const app = this.app = express();
+      const supportedVersions = ['v1.0.0'];
+      app.use(requestVersion.setBySemverPath(supportedVersions));
+      app.use(versionRoutes(path.join(__dirname, 'routes'), supportedVersions));
+      app.use((req, res) => res.status(404).end());
+      cb();
+    },
+    exactVersion(test) {
+      test.expect(2);
 
-    const wares = versionRoutes(path.join(__dirname, 'routes'), ['v1']);
-
-    test.equal(wares.length, 2, 'Subrouter not mounted correctly.');
-
-    test.equal(
-      wares[0].stack[0].regexp.toString(),
-      /^\/v1\/?(?=\/|$)/i.toString(),
-      'Version path not mounted.');
-
-    wares[1]({}, {}, () => {
-      test.ok(true, 'Unversioned request passes to next.');
-      wares[1]({ version: 'v2' }, {}, () => {
-        test.ok(true, 'Mismatched version passes to next.');
-        wares[1]({ version: 'v1' }, {}, () => {
-          test.ok(true, 'Versioned route handled.');
-          wares[1]({ version: 'v1.0.0', origVersion: 'v1' }, {}, () => {
-            test.ok(true, 'Orig version route handled.');
-            test.done();
-          });
+      request(this.app).get('/v1.0.0/users')
+        .end((err, res) => {
+          test.equal(res.statusCode, 200, 'Unexpected status code.');
+          test.equal(res.body.version, 'v1.0.0', 'Route not mounted correctly.');
+          test.done();
         });
-      });
-    });
+    },
+    missingVersion(test) {
+      test.expect(1);
+
+      request(this.app).get('/v2.0.0/users')
+        .end((err, res) => {
+          test.equal(res.statusCode, 404, 'Unexpected status code.');
+          test.done();
+        });
+    },
   },
 };
 
