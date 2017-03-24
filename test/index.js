@@ -33,7 +33,8 @@ module.exports = {
 
   mountVersionedRoute: {
     setUp(cb) {
-      const app = this.app = express();
+      this.app = express();
+      const app = this.app;
       const supportedVersions = ['v1.0.0'];
       app.use(requestVersion.setBySemverPath(supportedVersions));
       app.use(versionRoutes(path.join(__dirname, 'routes'), supportedVersions));
