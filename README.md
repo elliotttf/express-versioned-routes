@@ -1,5 +1,7 @@
 # Express Versioned Routes
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/elliotttf/express-versioned-routes.svg)](https://greenkeeper.io/)
+
 [![Build Status](https://travis-ci.org/elliotttf/express-versioned-routes.svg?branch=master)](https://travis-ci.org/elliotttf/express-versioned-routes)
 [![Coverage Status](https://coveralls.io/repos/elliotttf/express-versioned-routes/badge.svg?branch=master)](https://coveralls.io/r/elliotttf/express-versioned-routes?branch=master)
 
